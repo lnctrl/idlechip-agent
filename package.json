@@ -1,6 +1,6 @@
 {
   "name": "idlechip-agent",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "IdleChip desktop helper — scan local GPUs and sync stats to the marketplace",
   "license": "MIT",
   "author": "lnctrl",
