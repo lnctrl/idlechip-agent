@@ -2,6 +2,15 @@
 
 Public GPU verifier for [IdleChip](https://idlechip.com). Scans GPUs on your PC and syncs to **idlechip.com** (and preview hosts). Requires a **pairing code** from the website (proves you are signed in).
 
+## Version
+
+| Version | Status |
+|---------|--------|
+| **1.1.0+** | Current — required for **idlechip.com** (Ed25519 attestation at pair) |
+| **1.0.0** | **Deprecated** on npm — cannot pair with production |
+
+Always pin: `npx idlechip-verifier@1.1.0 …`
+
 ## Setup
 
 1. Sign in at **https://idlechip.com**
