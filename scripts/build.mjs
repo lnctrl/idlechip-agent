@@ -3,6 +3,7 @@ import { execSync } from "node:child_process";
 import { existsSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { brand } from "./brand.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const wantExe = process.argv.includes("--exe");
@@ -26,9 +27,9 @@ await build({
 console.log("Built dist/cli.js");
 
 if (wantExe) {
-  const out = join(root, "dist/idlechip-agent-win-x64.exe");
+  const out = join(root, "dist", brand.exeName);
   execSync(
-    `npx --yes @yao-pkg/pkg@6.6.0 cli.js -t node20-win-x64 -o idlechip-agent-win-x64.exe`,
+    `npx --yes @yao-pkg/pkg@6.6.0 cli.js -t node20-win-x64 -o ${brand.exeName}`,
     { stdio: "inherit", cwd: join(root, "dist") }
   );
   console.log(`Built ${out}`);

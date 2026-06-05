@@ -1,4 +1,4 @@
-# Rewrites idlechip-agent history to remove Cursor co-author trailers, then force-pushes.
+# Rewrites idlechip-verifier history to remove Cursor co-author trailers, then force-pushes.
 # See D:\lnctrl\idlechip\.agents\PUBLIC-AGENT-GIT.md
 param(
   [switch]$DryRun

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { scanGpus, formatGpuSummary, formatVram } from "./scanner/index.js";
+import { BRAND_DISPLAY_NAME, BRAND_PACKAGE_NAME } from "./brand.js";
 import { gpuHistoryKey } from "./types.js";
 import { authHeaders, loadCredentials, requireCredentials } from "./credentials.js";
 import { pairWithCode, syncHostConfigToApi } from "./sync-api.js";
@@ -20,20 +21,20 @@ const HEARTBEAT_INTERVAL_MS = 60_000;
 
 function usage() {
   console.log(`
-IdleChip Agent — scan GPUs and sync with idlechip.com
+${BRAND_DISPLAY_NAME} - scan GPUs and sync with idlechip.com
 
-Usage (npm — use npx on your PC):
-  npx idlechip-agent pair --url URL --code XXXX-YYYY
-  npx idlechip-agent scan
-  npx idlechip-agent register [--gpu KEY]
-  npx idlechip-agent watch [--session ID]
+Usage (npm - use npx on your PC):
+  npx ${BRAND_PACKAGE_NAME} pair --url URL --code XXXX-YYYY
+  npx ${BRAND_PACKAGE_NAME} scan
+  npx ${BRAND_PACKAGE_NAME} register [--gpu KEY]
+  npx ${BRAND_PACKAGE_NAME} watch [--session ID]
 
-Pair first (sign in on the site → My GPUs → Generate pairing code):
-  npx idlechip-agent pair --url https://idlechip.com --code ABCD-1234
-  npx idlechip-agent scan
+Pair first (sign in on the site -> My GPUs -> Generate pairing code):
+  npx ${BRAND_PACKAGE_NAME} pair --url https://idlechip.com --code ABCD-1234
+  npx ${BRAND_PACKAGE_NAME} scan
 
 Then scan / watch use your saved pairing automatically.
-This agent only connects to IdleChip (${DEFAULT_API_URL}).
+This scanner only connects to IdleChip (${DEFAULT_API_URL}).
 `);
 }
 
@@ -67,10 +68,10 @@ async function cmdPair() {
     throw new Error("Missing --code. Generate one on My GPUs while signed in.");
   }
   const creds = await pairWithCode(apiUrl, code);
-  console.log(`Paired as ${creds.ownerName} → ${creds.apiUrl}`);
+  console.log(`Paired as ${creds.ownerName} -> ${creds.apiUrl}`);
   console.log("");
-  console.log("Credentials saved. Next step — copy and run:");
-  console.log("  npx idlechip-agent scan");
+  console.log("Credentials saved. Next step - copy and run:");
+  console.log(`  npx ${BRAND_PACKAGE_NAME} scan`);
 }
 
 async function cmdScan() {

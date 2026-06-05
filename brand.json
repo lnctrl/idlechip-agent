@@ -1,0 +1,10 @@
+{
+  "displayName": "IdleChip Verifier",
+  "packageName": "idlechip-verifier",
+  "repoOwner": "lnctrl",
+  "repoName": "idlechip-verifier",
+  "exeName": "idlechip-verifier-win-x64.exe",
+  "credentialFile": "verifier-credentials.json",
+  "description": "IdleChip GPU verifier - pair, scan, and sync GPUs to idlechip.com",
+  "shortDescription": "IdleChip GPU verifier - scan local GPUs and sync stats to the marketplace"
+}

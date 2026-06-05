@@ -1,8 +1,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join } from "node:path";
+import { BRAND_CREDENTIAL_FILE, BRAND_PACKAGE_NAME } from "./brand.js";
 
-export interface AgentCredentials {
+export interface ScannerCredentials {
   token: string;
   ownerName: string;
   apiUrl: string;
@@ -12,14 +13,14 @@ export interface AgentCredentials {
 function credentialsPath(): string {
   const override = process.env.IDLECHIP_CREDENTIALS_PATH?.trim();
   if (override) return override;
-  return join(homedir(), ".idlechip", "agent-credentials.json");
+  return join(homedir(), ".idlechip", BRAND_CREDENTIAL_FILE);
 }
 
-export function loadCredentials(): AgentCredentials | null {
+export function loadCredentials(): ScannerCredentials | null {
   const path = credentialsPath();
   if (!existsSync(path)) return null;
   try {
-    const parsed = JSON.parse(readFileSync(path, "utf-8")) as AgentCredentials;
+    const parsed = JSON.parse(readFileSync(path, "utf-8")) as ScannerCredentials;
     if (!parsed?.token || !parsed?.ownerName || !parsed?.apiUrl) return null;
     return parsed;
   } catch {
@@ -27,7 +28,7 @@ export function loadCredentials(): AgentCredentials | null {
   }
 }
 
-export function saveCredentials(creds: AgentCredentials) {
+export function saveCredentials(creds: ScannerCredentials) {
   const path = credentialsPath();
   const dir = dirname(path);
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
@@ -39,19 +40,19 @@ export function clearCredentials() {
   if (existsSync(path)) writeFileSync(path, "{}");
 }
 
-export function authHeaders(creds: AgentCredentials): Record<string, string> {
+export function authHeaders(creds: ScannerCredentials): Record<string, string> {
   return {
     Authorization: `Bearer ${creds.token}`,
     "Content-Type": "application/json",
   };
 }
 
-export function requireCredentials(): AgentCredentials {
+export function requireCredentials(): ScannerCredentials {
   const creds = loadCredentials();
   if (!creds) {
     throw new Error(
       "Not paired yet. Sign in at https://idlechip.com, open My GPUs, generate a code, then run:\n" +
-        "  npx idlechip-agent pair --url https://idlechip.com --code XXXX-YYYY"
+        `  npx ${BRAND_PACKAGE_NAME} pair --url https://idlechip.com --code XXXX-YYYY`
     );
   }
   return creds;

@@ -1,16 +1,16 @@
 {
-  "name": "idlechip-agent",
+  "name": "idlechip-verifier",
   "version": "1.0.0",
-  "description": "IdleChip desktop helper — scan local GPUs and sync stats to the marketplace",
+  "description": "IdleChip GPU verifier - scan local GPUs and sync stats to the marketplace",
   "license": "MIT",
   "author": "lnctrl",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lnctrl/idlechip-agent.git"
+    "url": "git+https://github.com/lnctrl/idlechip-verifier.git"
   },
-  "homepage": "https://github.com/lnctrl/idlechip-agent#readme",
+  "homepage": "https://github.com/lnctrl/idlechip-verifier#readme",
   "bugs": {
-    "url": "https://github.com/lnctrl/idlechip-agent/issues"
+    "url": "https://github.com/lnctrl/idlechip-verifier/issues"
   },
   "keywords": [
     "idlechip",
@@ -20,7 +20,7 @@
     "cli"
   ],
   "bin": {
-    "idlechip-agent": "./dist/cli.js"
+    "idlechip-verifier": "./dist/cli.js"
   },
   "files": [
     "dist/cli.js",
@@ -28,6 +28,7 @@
     "LICENSE"
   ],
   "scripts": {
+    "brand:apply": "node scripts/apply-brand.mjs",
     "build": "node scripts/build.mjs",
     "build:exe": "node scripts/build.mjs --exe",
     "prepublishOnly": "npm run build",

@@ -1,19 +1,19 @@
-# IdleChip Agent
+# IdleChip Verifier
 
-Public desktop helper for [IdleChip](https://idlechip.com). Scans GPUs on your PC and syncs to **idlechip.com** (and preview hosts). Requires a **pairing code** from the website (proves you are signed in).
+Public GPU verifier for [IdleChip](https://idlechip.com). Scans GPUs on your PC and syncs to **idlechip.com** (and preview hosts). Requires a **pairing code** from the website (proves you are signed in).
 
 ## Setup
 
 1. Sign in at **https://idlechip.com**
-2. Open **My GPUs** → **Generate pairing code**
+2. Open **My GPUs** -> **Generate pairing code**
 3. On your PC:
 
 ```powershell
-npx idlechip-agent pair --url https://idlechip.com --code XXXX-YYYY
-npx idlechip-agent scan
+npx idlechip-verifier pair --url https://idlechip.com --code XXXX-YYYY
+npx idlechip-verifier scan
 ```
 
-Credentials save to `%USERPROFILE%\.idlechip\agent-credentials.json`.
+Credentials save to `%USERPROFILE%\.idlechip\verifier-credentials.json`.
 
 ## Commands
 
@@ -31,14 +31,18 @@ Credentials save to `%USERPROFILE%\.idlechip\agent-credentials.json`.
 - Pairing codes expire in **10 minutes** and are single-use
 - Token binds to your PC's `hostId` on first sync
 
-## Windows `.exe`
+## Windows .exe
 
-See [GitHub Releases](https://github.com/lnctrl/idlechip-agent/releases).
+See [GitHub Releases](https://github.com/lnctrl/idlechip-verifier/releases).
 
 ```powershell
-.\idlechip-agent-win-x64.exe pair --url https://idlechip.com --code XXXX-YYYY
-.\idlechip-agent-win-x64.exe scan
+.\idlechip-verifier-win-x64.exe pair --url https://idlechip.com --code XXXX-YYYY
+.\idlechip-verifier-win-x64.exe scan
 ```
+
+## Rename
+
+To change the public package/repo/exe identity, edit `brand.json`, then run `npm run brand:apply`.
 
 ## License
 

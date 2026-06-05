@@ -1,4 +1,4 @@
-/** Hosts the public agent may call (must match web `DEFAULT_AGENT_API_HOSTS`). */
+/** Hosts the public scanner may call (must match web `DEFAULT_AGENT_API_HOSTS`). */
 export const ALLOWED_API_HOSTS = [
   "idlechip.com",
   "www.idlechip.com",
@@ -18,7 +18,7 @@ export function assertAllowedApiUrl(raw: string): string {
   const allowed: readonly string[] = ALLOWED_API_HOSTS;
   if (!allowed.includes(host)) {
     throw new Error(
-      `This agent only works with IdleChip (${ALLOWED_API_HOSTS.join(", ")}). Got: ${host}. Use https://idlechip.com`,
+      `This scanner only works with IdleChip (${ALLOWED_API_HOSTS.join(", ")}). Got: ${host}. Use https://idlechip.com`,
     );
   }
   return url.origin;

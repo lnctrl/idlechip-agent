@@ -1,8 +1,8 @@
 import { loadLocalGpuConfig } from "./local-config.js";
-import { saveCredentials, type AgentCredentials } from "./credentials.js";
+import { saveCredentials, type ScannerCredentials } from "./credentials.js";
 import { assertAllowedApiUrl } from "./site-allowlist.js";
 
-export async function pairWithCode(apiUrlRaw: string, code: string): Promise<AgentCredentials> {
+export async function pairWithCode(apiUrlRaw: string, code: string): Promise<ScannerCredentials> {
   const apiUrl = assertAllowedApiUrl(apiUrlRaw);
   const config = loadLocalGpuConfig();
   const res = await fetch(`${apiUrl}/api/my-gpus/pair/redeem`, {
@@ -18,7 +18,7 @@ export async function pairWithCode(apiUrlRaw: string, code: string): Promise<Age
   if (!res.ok) {
     throw new Error(data.error ?? `Pairing failed (${res.status})`);
   }
-  const creds: AgentCredentials = {
+  const creds: ScannerCredentials = {
     token: data.token,
     ownerName: data.ownerName,
     apiUrl: data.apiUrl ?? apiUrl,
@@ -28,7 +28,7 @@ export async function pairWithCode(apiUrlRaw: string, code: string): Promise<Age
   return creds;
 }
 
-export async function syncHostConfigToApi(creds: AgentCredentials) {
+export async function syncHostConfigToApi(creds: ScannerCredentials) {
   const { loadLocalGpuConfig } = await import("./local-config.js");
   const config = loadLocalGpuConfig();
   config.ownerName = creds.ownerName;

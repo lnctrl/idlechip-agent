@@ -18,11 +18,8 @@ if (git log main --format=fuller | Select-String "Co-authored-by: Cursor") {
 Write-Host "Creating orphan branch with one commit..."
 git checkout --orphan clean-main
 git add -A
-git -c user.name=$authorName -c user.email=$authorEmail commit -m @"
-Public IdleChip GPU verifier (idlechip-agent).
-
-Pair, scan, register, and sync local GPU stats to idlechip.com.
-Includes commit hooks that block Cursor co-author trailers on this repo.
+git -c user.name=$authorName -c user.email=$authorEmail commit -m "Add IdleChip verifier CLI" -m @"
+Pair with idlechip.com, scan local GPUs, and sync stats to the marketplace.
 "@
 
 git branch -M main

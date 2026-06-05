@@ -1,4 +1,4 @@
-/** Types shared with the IdleChip web API (agent subset only). */
+/** Types shared with the IdleChip web API (scanner subset only). */
 
 export interface GpuSpecs {
   id: string;
